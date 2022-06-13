@@ -1,7 +1,7 @@
 import ast
 import json
-import re
 from decimal import Decimal
+from fractions import Fraction
 
 import numpy as np
 
@@ -32,3 +32,26 @@ print(f"{get_poss('4_ATK%.json', ['CD', 'CR'], 2) = }")
 print(f"{get_poss('6_ATK.json', ['ATK%', 'CD', 'CR'], 1) = }")
 print(f"{get_poss('6_ATK.json', ['ATK%', 'CD', 'CR'], 2) = }")
 print(f"{get_poss('6_ATK.json', ['ATK%', 'CD', 'CR'], 3) = }")
+
+n = 2
+
+print(f'>={n}:', 1 / (Decimal(0.9) * sum((get_poss('0_Pyro.json', ['ATK%', 'CD', 'CR'], n - 1) * Decimal(0.05),
+                                          get_poss('3_CR.json', ['ATK%', 'CD'], n - 1) * Decimal(0.1),
+                                          get_poss('4_ATK%.json', ['CD', 'CR'], n - 1) * Decimal(8 / 30),
+                                          get_poss('6_ATK.json', ['ATK%', 'CD', 'CR'], n)),
+                                         Decimal(0))))
+
+print(f'>={n}:', 1 / (Decimal(0.9) * sum((get_poss('0_Pyro.json', ['ATK%', 'CD', 'CR'], n - 1) * Decimal(0.05),),
+                                         Decimal(0))))
+
+print(f'>={n}:', 1 / (Decimal(0.9) * sum((get_poss('3_CR.json', ['ATK%', 'CD'], n - 1) * Decimal(0.1),),
+                                         Decimal(0))))
+
+print(f'>={n}:', 1 / (Decimal(0.9) * sum((get_poss('4_ATK%.json', ['CD', 'CR'], n - 1) * Decimal(8 / 30),),
+                                         Decimal(0))))
+
+print(f'>={n}:', 1 / (Decimal(0.9) * sum((get_poss('6_ATK.json', ['ATK%', 'CD', 'CR'], n),),
+                                         Decimal(0))))
+
+print(Fraction(8 / 30))
+print(float(Fraction(8 / 30)))
